@@ -17,6 +17,13 @@
       html {
         scroll-behavior: smooth;
       }
+      .sr-only {
+        position: absolute;
+        width: 1px; height: 1px;
+        padding: 0; margin: -1px;
+        overflow: hidden; clip: rect(0,0,0,0);
+        white-space: nowrap; border: 0;
+      }
     </style>
   </head>
   <body class="min-h-screen bg-gray-50 text-gray-800 antialiased">
@@ -24,7 +31,7 @@
     <header class="bg-gray-900 text-white">
       <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
         <!-- Logo -->
-        <a href="#" class="flex items-center gap-2" aria-label="AAA TRANS anasayfa">
+        <a href="#" class="flex items-center gap-2" aria-label="AAA TRANS anasayfa" data-i18n-aria-label="brand.home_aria">
           <span
             class="inline-flex h-8 w-8 items-center justify-center rounded bg-amber-500 font-bold"
             aria-hidden="true"
@@ -33,13 +40,14 @@
           <span class="text-lg font-semibold tracking-wide">AAA TRANS</span>
         </a>
 
-        <!-- Navigation -->
-        <nav aria-label="Birincil">
+        <!-- Navigation + Language -->
+        <nav aria-label="Birincil" data-i18n-aria-label="aria.primaryNav">
           <ul class="flex items-center gap-6 text-sm md:text-base">
             <li>
               <a
                 href="#araclar"
                 class="text-gray-200 hover:text-white transition-colors"
+                data-i18n="nav.vehicles"
                 >Araçlarımız</a
               >
             </li>
@@ -47,6 +55,7 @@
               <a
                 href="#firsatlar"
                 class="text-gray-200 hover:text-white transition-colors"
+                data-i18n="nav.deals"
                 >Fırsatlar</a
               >
             </li>
@@ -54,6 +63,7 @@
               <a
                 href="#hakkimizda"
                 class="text-gray-200 hover:text-white transition-colors"
+                data-i18n="nav.about"
                 >Hakkımızda</a
               >
             </li>
@@ -61,8 +71,18 @@
               <a
                 href="#iletisim"
                 class="text-gray-200 hover:text-white transition-colors"
+                data-i18n="nav.contact"
                 >İletişim</a
               >
+            </li>
+            <li class="ml-2">
+              <label for="lang-switcher" class="sr-only" data-i18n="ui.language">Dil</label>
+              <select id="lang-switcher" class="bg-gray-800/80 text-gray-100 rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400">
+                <option value="tr">Türkçe</option>
+                <option value="pl">Polski</option>
+                <option value="en">English</option>
+                <option value="de">Deutsch</option>
+              </select>
             </li>
           </ul>
         </nav>
@@ -80,20 +100,22 @@
           background-position: center;
         "
         aria-label="Kahraman alanı"
+        data-i18n-aria-label="hero.ariaLabel"
       >
         <div class="absolute inset-0 bg-gray-900/70"></div>
         <div class="relative mx-auto max-w-7xl px-4 py-24 md:py-28">
           <div class="max-w-2xl text-white">
-            <h1 class="text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
+            <h1 class="text-3xl font-bold leading-tight sm:text-4xl md:text-5xl" data-i18n="hero.heading">
               Hayalinizdeki Araca Bir Adım Uzaktasınız
             </h1>
-            <p class="mt-4 text-base text-gray-200 sm:text-lg">
+            <p class="mt-4 text-base text-gray-200 sm:text-lg" data-i18n="hero.subheading">
               Geniş ve sigortalı filomuzla konforlu yolculuklar sizi bekliyor.
             </p>
             <div class="mt-8">
               <a
                 href="#araclar"
                 class="inline-block rounded-md bg-amber-500 px-6 py-3 text-sm font-semibold text-gray-900 transition-colors hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 focus:ring-offset-gray-900"
+                data-i18n="hero.cta"
                 >Filoyu İncele</a
               >
             </div>
@@ -104,10 +126,10 @@
       <!-- Featured Vehicles Section -->
       <section id="araclar" class="mx-auto max-w-7xl px-4 py-16">
         <header class="mb-8">
-          <h2 class="text-2xl font-bold text-gray-900 md:text-3xl">
+          <h2 class="text-2xl font-bold text-gray-900 md:text-3xl" data-i18n="featured.title">
             Öne Çıkan Araçlarımız
           </h2>
-          <p class="mt-2 text-gray-600">
+          <p class="mt-2 text-gray-600" data-i18n="featured.subtitle">
             İhtiyacınıza uygun ekonomik, konforlu ve aile araçlarımızdan seçin.
           </p>
         </header>
@@ -118,13 +140,14 @@
             class="overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-gray-100 transition hover:shadow-md"
           >
             <img
-              src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxITEhUSExIWFhUVFRYVFhgYGBcbHRYVFxUXFhcVFxcYHSggGBolGxcVITEhJSkrLi4uFx8zODMtNygvLisBCgoKDQ0NDg8PDi0ZFRktKzA3MSsrNysrKzc4KysrKysrKzc4OCsrKzcrKysrKystKysrKystKysrKysrKys3K//AABEIAKEBOAMBIgACEQEDEQH/xAAcAAEAAgMBAQEAAAAAAAAAAAAABQYDBAcCAQj/xABHEAABAwEFAwkGAggEBQUAAAABAAIDEQQFEiExBkFRBxMiMmFxgZGhQlJyscHRM0MUI1NigpKy4RWi8PEWRMLS4hckNHOD/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAH/xAAXEQEBAQEAAAAAAAAAAAAAAAAAEQEh/9oADAMBAAIRAxEAPwDuKIiAiIgIiICIiAiIgIouxvLLRJCTlIOfjr4MlaOwOwO//VSiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIStK1XtBH1pGjxr8kG6irto2wgb1Q53hT1URbOUFjdAxvxvH3QWHaWrGNtI1szucdTfCRhmHb0CXAcWNUuxwIBBqCKg8Qd65jauUcEFplhoQQaGuRy7VpWDlBZDEyFkzMEbQxtRI4hrRQAu1OSDriLlQ5Sq/nReUg+ZWeHb1ztJIndgfn5EoOnIudf8XS7208F4ftmW9Z7B30HzQdIRcy/9QGfto/5h9F7bygs/aA92L6IOlIuds5Qme9/lf8AZZWcpMG9w8nfZBf0VMg5RbKcsQ8AfspGHbSyO/MA9P6qILEi0bFe8EuUcrSeFc/Ab1vICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAom/r5EGFoFXvrQcAN5Uq9wAJOgzKoV+WnHI99KkDIdg0agidptqHRsxyyH91gNK/Ydq59bNorS80a4Mz0aM891XVNVpXm+SacvmrVpyafZO4U7EsVnxOz0BqfBB9fZ539d7j8TifReBdJ4hSMlujGVSe4L5HbWOIArU8QrxEbPYMIqf9ei1cKlbylB6IOYOfko4ty8lB4hhr0iDhWFx7FnIzyK84UG5YbVNE0PjkIbvbWoy4tOXiM1OWS8IbSOblYGvOnuuP7p1aezyKqxatmyQh/RO8Zd43eSCet75YOt0me/Q1b8QbQU7QO/iou2368HC07hnU788s1KXXehH6i0Hsa8+gcfk7z4qJ2j2edETJEOj7TRu7W/byRXiC/ZAQTR3Ya/dZrRenPGrmU3ZHTuVbZJXTv8Fs2WcVFRUfMb0RvYyDVpORy4qfsV5SjrVIO8E4m+ZoR6qPghaN2Y38Qcw7yW0HKwq4XDekTXjnKvBpkV0e77SHitnlqP2chJ8A7rN9QuFh6k7uviWIgh2Q3V+RUhXcYbaCQ1wLHnRrt/wu0d8+xbSoVx7YslHNzAOB1BpX+6tNnlcBihdzrPcJ6Tfhcde53mipRFgslsZIDhOY6zTk5p4Oacws6AiIgIiICIiAiIgIiICIiAiIgLxJIGiriAO1e1Q9t5OelETJy3AP1jWPzFdzgDlkMq8UXMrf2h2nZQxxdLidyqL7wJ13rIbMsYsm/tPoaIjTt93wzjpjpbnDJw8d/cVW7bs9JHXCOcbxb1h3t3+Ct5sxCBpCDm74SDQ68DkfI5ryGEGoXSZImu6zQe8A/Nasl0Wc6xN8Mv6aIOfuGpOpXoM18PqrlPs5AdMba8HV/qqtd+yw9mY/xNB9QQgqph1XnmCrK/ZuYaGN3iW/MFaslzWhv5RPwlrvrVEQhhSMge0B4gfVYr8ZK04TC+lKjMtJ49EjNQbm01Y8eAPyKKsVrJfhBO/I+B371OXBeulnm7mOPkGE/I7tOCocFqwOBGIUOhac+xWW2Mq0Gh8e0aIjdvq4TC50sbMTXVD2Uz7S3t4jeqxDZq5tkaRXtHnlkV0DZe9OeAgkP6wA4CfzGj2SffAHiO5fb22XjJMmFzHAEktyrlv1DvEFFV2zEc2zMF7SWmhyMerT3g1FOBWYOWydmBvnkH8LPoAssWy7TkLa8fwN+6tSNRpXsFSbdkK/8ANynuDF6GyMXtWucd4Z9AUpEc15Cnrn2tlgc0OJLTliGo+IbwvEOxsG60TP7nsr/KWg+iyjZOyt677T4vaPkwKC+3be8dpALyGSDqyMIr/cdhUo+++YIbai0A9WVvVdT3h7DqeC5vDs1YN/PHvlP0AUjBcFgHsv8AGWT/ALkV0yy2qORodG9r2nQtII8wsyoV13bZoDis7Wsd3u+6lXXrMzMhxHFtHjxrmEFoRV6x7Shxp0XdgOE/yu1UrBeUbjTFhPB2R+x8EG4iIgIiICIiAiIgIiIC53eEbRLK5oAxyOeSABiJNMRpqaACp4K9XlPgjJ3nId5/tXyXOb3vOJhOJwFOt2d/BB6qjNT5+f8AeqgbLtXZHuwtlaTwDm592eam4Z2uoWnsI9R9fNBmXwtC1bZaww0pUlaEl5u3UCCWMQXnmQoQ3jJ7y9svV/EHwQSr4cx4n5fdak1tia4Mc4gnfR1K7gXUoFgkvHEMLm1BBGRI4b92i1myOGTZpA3g6knq+qCb5heDAV8sVoYGhpeCeNA30AoFuB7TpQoIa8rojmbhlja8DSo07jqPBV61bG2fcx4HASPp6kq9loWN0SDi963SbLMMnGJ2h1LTvBNNRqrHcl185FikLxn0XVBDm0qHUcMv7LoBsYO5eZbJlkd4GYB3hBVrBckLS1znSEg4hQhtDWoOWdVZ23i2lMZzy6TQf6aJJZCNQ091QfAZ1818fdgQfRLG4AENcaAVaaE9tHUHqteexRnR1PiGX8wyXyS6ytd1heNCR3IPElkkZm3McWmoXht4vGTgChjlB1NeI18xmqodop8WF+F2ftNAOvvNIQW4WyN2vRKzstT2jovNOFajyOSqLb3rrEf4XA+hotiG9I/fw/EC355ILQLwB68Y729E+XV9Fka5jurJQ8Hin+YVHnRQLLZXWh7QvfOcCgnHvkZmQabjqD3EZFZ7PfD27yoKz217Oq4iuo3HvGhWf9JY7rNwni3Txb9kFhNtil/EYK+8Mj/dfRJNGKxv51nuPFSB2bx4FV0kjMGo4j/WSzWe2kb0FxujaUVw1LD7js2n4Tq1Wqx3g1+XVdwO/wCE6Fcuke2TXJ3Hj3rcu28Ht6DjWn+ge/tQdRRQVz3411I5HDEa4a6uAFT3kBTqAiIgIiICIiCp8oludDFC9v7UinfDIBXuJB8F+er2lfbppGiTBZoM3vdoTWmKntOc6tBwB0zXe+V5pFgMg/LkDvNr2/MhcCuqyh7YoHBxiY0WmcNrV75Ooyu7oYc93T3oIuSw2cmkbyfi3qz7H7QSNkFnlNXD8Jx7M8Djv7PJT963PZBMxnMxizOsz5jga0OaQQ1pjkGdTUHOtajiqBfNlMZBa/FTC+OQe3Gc2P7HAihG4goOt3lKHYXjRzfIg5hRrnLXuW8eegY73hipwdo8eYWYMJNAgxuK8kqWiukkVJp6r066ODgfBBD417Eq3J7reN3ktOSzEIPbZ1kbOtJzCF5xFBLx25w9orYjvN3YVBCVZBMgsUd6De3yWyy2tcWgHfoe4qsslWVsmYQWqq157c1uVangFE269wGE1wgCrnHcN65ve+20jnFlmGFuYxEVc7tAOQHf6IOrf4k3gVt2adjsgc+BXChfduBrzz/T5Uopu59uJGkNtDQR77MiO0t3+CDswgB3Ks3pG+xT/pEWGjq5OALauHSYQdQet/spC5b4a9rekHNcOi4H5lS1piEjSwjI/wCskFWiv5k/4l32N7iaBwDo8+JLan/YrTmNjIOOwyR54SYp8VHfBK367lo2tjbHPgliY+NxyJZiIHFlHNNfEKSks0dBK1j3wvDahmOuftANc8Agahx3bigiLquizPxiWd1le13RdzTyHtOhdzbjhcN+ZGa25Lle38O8rFJXTnHOYfGrfmVKuuRrm44pS5pGVQ13ZTQHszWi6yyMDR0HYTUVDm65EHXI5eSCDvC1WqzkCRkLwdHRSB7T3FpNPGi+MvuSlTZn0OdRiz/yrZtF3nczPiHD60VPt0D45HBwLCSSM6Aiu6lK+aC1t2kaNY3jy+pCys2jhPvDwH0KpQtsg0lk/nPy5xZP8Rm/auPkajxqglrPekjrYQ17hG95w5NqBhypXtGlVbZr1mZRuAPcSQ1wqa04sA140PlWi52y9pWSRyEh4Y4Gha0V8Q0EAjLxVq2qtjRFEInHDK58tQaVDhWmWgJkrRBMMvUxP52WSsraFsbSC+urQ7DlE3I5HM5gAkruV02sSwRSjR8bHebQaL8s2J4BoKaHIU0OLd214AHfTVd+5Mb25yyRMdqGCm7TLSuWQBp3oLmiIgIiICIiCK2pun9Lsk1nrQyMIaeDhm0nsxAL8+3E10H6W58ZPNzCGUDMtEbMPcQDVfpdcJvCaWy3neMDGtJkkFoY11AHYm4sVdaAvOQ1wlBATtZzQjEj2MfUND2uDg2gOFhIzoNBwA4KL2idZ3QM5gZQudC7X2gX79ekHZ9qukVocWslmkE1rwvtGDCMMbWOaxkbQR0XEOdWmufAKpbY2iyuhEtmaGtmfidqKuodW7nCjgaaoPuwto/VPZ7j6jucK/MOVmit4a6gcxrtKu3doC57sjb2xvkDjTEG0/hJ+6strdFNQ84Wu3FpHqDkUFqZd8cmb5zIeGMU8AMvRZDs5F7Jc08QafJUf/DpPZna7vbT1afojDbY+qSfgk+jgEF1dd1pZmy0OIGdHdL+r7o+12luUsDJBxbUH1qPkqiNpLawdIPI7WB3q1bkO3zwemxh82n1QTot9nd1g+I/vNqPMVWQWEPFY3teP3SCo6PbKzv/ABIT3ijl9/TLvkNQ8xu40I9QgyzWIjdRazoSFIRPdT9Va2SD3XkH55+qS4/bip+8zpDy1CCNa5ZmPzHcfovUsQObTVazXdLw+qCr7d3k5zmWVlTWhcBq5xPQb9adoUZLGyz0iaA+Y0DyM6OPsNprnllqvsdprarRaD+XjLfirzbPIZ/wqb2bsksEBtzRWVxJa40qxrTnh4FxBz90ZalBGm4LwyrCGkioa50TXUOnQc8O9FF2mFwcY5YzHINWuBB8iulbdyMtcFlfG7N0zQ/D1mMkoCCa5Ukxt8Atfa+2QWqRlic1oc1mGKfeyXc153xE0bTdXFuQU/ZO/DZpRE8/qXmhr7Dj7Q7OP9l2q6bVjbhOrfUbl+fLXEcw4Uc0lrgdQ4ZELp3J/fJdExzjV0Z5p/aAMj25EeIQXi9LtimbSRjXU0qNO47lS7uNmwvNnk6AcS4mESMqBrWWMkClNCFaL6vZrYJXCtRG+nfhNFTLLZS2wRwhpLrQ4AhscknQPSeSyLplvNtoaZ9JB7sl5TWWagYHRnNwaHDECevR5OF/ZofUXNojmYHjMOGRpQjsIOhHBUK8nyvkZC0yVJDQDJebemdac/k0gVJBOgOa6DZLMIo2xgkhoAqcyTvcTvJNT4oIi1XcRpmPVRNtsDJGlr2924jtB3Ky221NZrrwULabyO4DxzQU217Kyg9BwcOJNDTgRQgrA3Zaf9zs6Q8urorBbL/Yw0c9gPDf5BaM+1UYIGIknSjD9Qgjn7HTOFDIwDxP2qtuzbG0H6yavc0D56rBLtblUMkp20atGTah50Y0drnILVZrossQzJdvoTX0GStuw98f+9ghY2jSX18InmgA00C5E2+J3EZtI4Rscf8AM4UVm5K7XL/jFla55IcZQQ4sqCIJCDRumiD9KIiICIiAiIgLlHLXcsjHQ3nCM4Rzc1BpGSSx54tBc5p7HjgurrxLG1zS1wDmuBBBFQQciCDqEH5zst52ZxE5c8TBhbQ4cFCQT0q1pkN1VT9q70ZK8NjAEbMRFBQOc41c6nD/AH3rsu0HIdBI9z7LaX2drjXmy3nGDsb0muA7CSq87kBtBP8A86KnHm3V8q/VByK7rMZZGsGVTmeDd58lfbDYrDA4lrC80I/WEOFPhpSuWqtUHIZaIx0LdGa61icPXEVgtPI/eDdJIn9ziP6gEFdtM9lOkeH4XOb6A0Wi+1NHUkeO8g/RTNr5NbxZrA8/CWu/pJUDbtmrRF+JFIz4mub8wg+/4u8e0D31C9G/gcnMB8j81FSXa9a0lgegm/0qxu60bR3CnyXptmszurI9vc6vo6qrT7G9YTC8cUFtF1n2LQD8TR82kLJHBa2dR4PwvcPRwVNbLK3QlZ473mb7RQXB142oGropK8Rhd8jUrZsNvMlSWlpFAagj0KqEe00o1zW1HtSd4KCOkJAnHGQejnroBvE2SGHGwmHmY8wAaVa0Zj2hU14rnU04e95ByccVO81PzK6rcu04ZY4HmIyvjjbG1oblWOjavdTLQcK5IIWF0DGF0bzEx2F4a8ENFSa4S8ZA0046Z65LIbHZ3maSRkjyWlrj0g0gZiNmhdWvTPgp6Nk9usxtNr5tsU0sUMEJaQHVlFX9GhJpk0nSrisdpuix2xj7NK3BLA44cJDXFtAcTa5PIBALT2FBQtscLrQZmVwzsbKO89E+rSfFbHJ/asMskfvMDx3tNPk4eSx7ZWcRyRxB2IRxhgdxoAa+ZK0djpqWtva149K/REdGvgl8D2DV4awd7nBv1WpfIBmoI8cdmiDac22RofJQioM8TmENawBwr1zotyOTTsII7xmPVfDs5FLje5wfjeXmsUGIEimESGMvDaAUGLcEV42Guyrn2pzcObmM6LmkmtHuLTI8ZUwgg+8rJb7dh6Ldfl/dYbKeaY2NjQGMaGtHADJYJWNPskdx+6COtEnmqjtBfdCYoicXtPDSQ3sHb8lZ7+sUjonCA9M+8aZb6EaHtVBFxWhuXMkH/wCw07dAg0GxGtaP4k820eOImq37ru2WZ+CISOdQnCHE5caMachUb1ki2cnP5bB34nZeJV25KrokitrnOw05h4o3iXx7vBBBxcnFukoOaLe1zh/1OB9FMWDkomacUk8bd3WJ17MIHqupXhCZBzbXUcSHYakFzWnNvROIDtCwDZiR9MZJpjp0aVa9xcQcZNaVIB3ZcEFEvfk2his00rpXvdFFJI0AGhc1hIBa5xqKjTJRHJdCWXhZpXRvDGOdQ0a0AyMdGOg2uXT4rtdpuOSVjoyQ0PaWk60qKVpvWO6NioIXNeXySOaajEQACNOiwCvjVBZkREBERAREQEREBERAREQF8IX1EEdbLhssv4lnid2lja+dKqDtnJ1d79InM+Fx+TqhW1EHNbbyRQH8Odw7HNDvUEfJQNt5IJx1HxO8SD6inqu0Ig/PNu5MLaz8gn4S13oDVV63bHzx9eGRvxMcPmF+p0QfkKW4jwWnLcpG4r9e2m6oJPxIY3fExp9SFD2vYS75NbOGn90ub6A0QflI3a5pqrDspfIhLopPw36/uOpTF3HQ9wXc7RyUWJxyfM3sBYfmxVHbTkaLY+esD3vkb1o3lnTb+4QAMQ4HXs3hCXrY7VJ+jSQMc6OORsgOeFxac8NN9Mqr1eljjdMLU6Usexrm0FKyk6DPqcXPpWlRrSlHgvq02UmLFNC4HpMq5hB7WHQ+C07dfEj69I56kkknxKD7tDbudmc4GoGQPHeT4kkqIZKWuDhqEe9e4rMXINtt8yDQkdxKzR7RTjSWQdzytMXc7tWRt1u7UG+NrLT+3k816/4ttf7d3jRabLpPBZmXWeCDMNqLYfzneTfsvMl+W135zvT7LLHdp4Laiu88EEU59rf1pXfzH6KQuW63NkD3yvpo4Me5hc06tLxnTIeSkYbAeC34LA7gUF/2Q2jsljYWwWNkZd13B5L30r13uBc7U6nKquNl22hdq0juIP2XIbNdr+BUzYbpkJAAJPYg67Y77gkya8Anccv7KRXPbp2ZtDqYhgHF3/bqr9ZosDGtqThAFTqaDUoMiIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiINC9Lks1pFLRZ4pRu5xjXU7iRkoF/JndBNf0GKvZjA8g6itqIKlNyaXS7/ko2ni0vb/S4LVk5LLu9lj29zq/1Aq7og5/JyUWX2ZHjvDT8qLWk5J4/Zn82f+S6SiDl7uSg7pmfylfByUu/bM8nLqKIOaR8lnGZvg0/dbkPJjGNZj4M/wDJX9EFOg5PLMNXvPg0fQqQg2NsjfZce8/YBWFEEdDcVmbpC3xqfmt6OJrcmtA7gB8l7RAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREH/9k="
+              src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxITEhUSExIWFhUVFRYVFhgYGBcbHRYVFxUXFhcVFxcYHSggGBolGxcVITEhJSkrLi4uFx8zODMtNygvLisBCgoKDQ0NDg8PDi0ZFRktKzA3MSsrNysrKzc4Ky[...]"
               alt="Ekonomik sınıf araç örnek görseli"
+              data-i18n-alt="alt.economy"
               class="h-48 w-full object-cover sm:h-56"
               loading="lazy"
             />
             <div class="space-y-3 p-5">
-              <p class="text-xs font-medium uppercase tracking-wide text-amber-600">
+              <p class="text-xs font-medium uppercase tracking-wide text-amber-600" data-i18n="class.economy">
                 Ekonomik Sınıf
               </p>
               <h3 class="text-lg font-semibold text-gray-900">Renault Clio</h3>
@@ -138,11 +161,9 @@
                     fill="currentColor"
                     aria-hidden="true"
                   >
-                    <path
-                      d="M19.14 12.94a7.5 7.5 0 0 0 .05-.94 7.5 7.5 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.46 7.46 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54c-.57.22-1.12.52-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.7 7.84a.5.5 0 0 0 .12.64L4.85 10.06a7.5 7.5 0 0 0-.05.94c0 .32.02.63.05.94L2.82 14.5a.5.5 0 0 0-.12.64l1.92 3.32c.13.23.4.32.64.22l2.39-.96c.5.41 1.06.73 1.63.94l.36 2.54c.05.24.26.42.5.42h3.84c.24 0 .45-.18.5-.42l.36-2.54c.57-.22 1.12-.52 1.63-.94l2.39.96c.24.1.51.01.64-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58ZM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7Z"
-                    />
+                    <path d="M19.14 12.94a7.5 7.5 0 0 0 .05-.94 7.5 7.5 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.46 7.46 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.4[...]"/>
                   </svg>
-                  Otomatik Vites
+                  <span data-i18n="spec.transmission.automatic">Otomatik Vites</span>
                 </li>
                 <li class="inline-flex items-center gap-1">
                   <!-- Fuel icon -->
@@ -152,11 +173,9 @@
                     fill="currentColor"
                     aria-hidden="true"
                   >
-                    <path
-                      d="M7 2a2 2 0 0 0-2 2v14a4 4 0 1 0 8 0V4a2 2 0 0 0-2-2H7Zm10 5v10a3 3 0 0 0 6 0V8.83a3 3 0 0 0-.88-2.12l-3.83-3.83-.71.71L21.41 7H19a2 2 0 0 0-2 2Z"
-                    />
+                    <path d="M7 2a2 2 0 0 0-2 2v14a4 4 0 1 0 8 0V4a2 2 0 0 0-2-2H7Zm10 5v10a3 3 0 0 0 6 0V8.83a3 3 0 0 0-.88-2.12l-3.83-3.83-.71.71L21.41 7H19a2 2 0 0 0-2 2Z"/>
                   </svg>
-                  Benzinli
+                  <span data-i18n="spec.fuel.petrol">Benzinli</span>
                 </li>
                 <li class="inline-flex items-center gap-1">
                   <!-- Users icon -->
@@ -166,21 +185,20 @@
                     fill="currentColor"
                     aria-hidden="true"
                   >
-                    <path
-                      d="M16 11a4 4 0 1 0-8 0 4 4 0 0 0 8 0Zm-9 6a5 5 0 0 0-5 5h2a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5H7Z"
-                    />
+                    <path d="M16 11a4 4 0 1 0-8 0 4 4 0 0 0 8 0Zm-9 6a5 5 0 0 0-5 5h2a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5H7Z"/>
                   </svg>
-                  4 Kişilik
+                  <span data-i18n="spec.seats4">4 Kişilik</span>
                 </li>
               </ul>
 
               <div class="mt-2 flex items-end justify-between">
                 <p class="text-xl font-bold text-gray-900">
-                  30 Euro <span class="text-sm font-medium text-gray-500">/ Gün</span>
+                  30 Euro <span class="text-sm font-medium text-gray-500" data-i18n="price.perDay">/ Gün</span>
                 </p>
                 <a
                   href="#iletisim"
-                  class="rounded-md bg-amber-500 px-4 py-2 text-sm font-semibold text-gray-900 transition-colors hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2"
+                  class="rounded-md bg-amber-500 px-4 py-2 text-sm font-semibold text-gray-900 transition-colors hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 focus:ring-offset-white"
+                  data-i18n="cta.rentNow"
                   >Hemen Kirala</a
                 >
               </div>
@@ -192,13 +210,14 @@
             class="overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-gray-100 transition hover:shadow-md"
           >
             <img
-              src="data:image/jpeg;base64,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"
+              src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMVFRUXGBcXGBgYGRkWGBgVFRUXFhgVGBcYHSogHxolIBcVITEhJSkrLi4uFx8zPTMsNygtLi0BCgoKDg0NFQ8PFTIZFRkxKzcrLC0rKzIrLS03Ky[...]"
               alt="Konfor sınıf araç örnek görseli"
+              data-i18n-alt="alt.comfort"
               class="h-48 w-full object-cover sm:h-56"
               loading="lazy"
             />
             <div class="space-y-3 p-5">
-              <p class="text-xs font-medium uppercase tracking-wide text-amber-600">
+              <p class="text-xs font-medium uppercase tracking-wide text-amber-600" data-i18n="class.comfort">
                 Konfor Sınıf
               </p>
               <h3 class="text-lg font-semibold text-gray-900">Toyota Corolla</h3>
@@ -211,11 +230,9 @@
                     fill="currentColor"
                     aria-hidden="true"
                   >
-                    <path
-                      d="M19.14 12.94a7.5 7.5 0 0 0 .05-.94 7.5 7.5 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.46 7.46 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54c-.57.22-1.12.52-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.7 7.84a.5.5 0 0 0 .12.64L4.85 10.06a7.5 7.5 0 0 0-.05.94c0 .32.02.63.05.94L2.82 14.5a.5.5 0 0 0-.12.64l1.92 3.32c.13.23.4.32.64.22l2.39-.96c.5.41 1.06.73 1.63.94l.36 2.54c.05.24.26.42.5.42h3.84c.24 0 .45-.18.5-.42l.36-2.54c.57-.22 1.12-.52 1.63-.94l2.39.96c.24.1.51.01.64-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58ZM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7Z"
-                    />
+                    <path d="M19.14 12.94a7.5 7.5 0 0 0 .05-.94 7.5 7.5 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.46 7.46 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.4[...]"/>
                   </svg>
-                  Otomatik Vites
+                  <span data-i18n="spec.transmission.automatic">Otomatik Vites</span>
                 </li>
                 <li class="inline-flex items-center gap-1">
                   <svg
@@ -224,11 +241,9 @@
                     fill="currentColor"
                     aria-hidden="true"
                   >
-                    <path
-                      d="M7 2a2 2 0 0 0-2 2v14a4 4 0 1 0 8 0V4a2 2 0 0 0-2-2H7Zm10 5v10a3 3 0 0 0 6 0V8.83a3 3 0 0 0-.88-2.12l-3.83-3.83-.71.71L21.41 7H19a2 2 0 0 0-2 2Z"
-                    />
+                    <path d="M7 2a2 2 0 0 0-2 2v14a4 4 0 1 0 8 0V4a2 2 0 0 0-2-2H7Zm10 5v10a3 3 0 0 0 6 0V8.83a3 3 0 0 0-.88-2.12l-3.83-3.83-.71.71L21.41 7H19a2 2 0 0 0-2 2Z"/>
                   </svg>
-                  Hibrit
+                  <span data-i18n="spec.fuel.hybrid">Hibrit</span>
                 </li>
                 <li class="inline-flex items-center gap-1">
                   <svg
@@ -237,21 +252,20 @@
                     fill="currentColor"
                     aria-hidden="true"
                   >
-                    <path
-                      d="M16 11a4 4 0 1 0-8 0 4 4 0 0 0 8 0Zm-9 6a5 5 0 0 0-5 5h2a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5H7Z"
-                    />
+                    <path d="M16 11a4 4 0 1 0-8 0 4 4 0 0 0 8 0Zm-9 6a5 5 0 0 0-5 5h2a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5H7Z"/>
                   </svg>
-                  5 Kişilik
+                  <span data-i18n="spec.seats5">5 Kişilik</span>
                 </li>
               </ul>
 
               <div class="mt-2 flex items-end justify-between">
                 <p class="text-xl font-bold text-gray-900">
-                  40 Euro <span class="text-sm font-medium text-gray-500">/ Gün</span>
+                  40 Euro <span class="text-sm font-medium text-gray-500" data-i18n="price.perDay">/ Gün</span>
                 </p>
                 <a
                   href="#iletisim"
-                  class="rounded-md bg-amber-500 px-4 py-2 text-sm font-semibold text-gray-900 transition-colors hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2"
+                  class="rounded-md bg-amber-500 px-4 py-2 text-sm font-semibold text-gray-900 transition-colors hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 focus:ring-offset-white"
+                  data-i18n="cta.rentNow"
                   >Hemen Kirala</a
                 >
               </div>
@@ -265,11 +279,12 @@
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj40TdsHVaGTvuVsaApY-eI0Ky-qmH5HuIWQ&s"
               alt="Aile sınıf araç örnek görseli"
+              data-i18n-alt="alt.family"
               class="h-48 w-full object-cover sm:h-56"
               loading="lazy"
             />
             <div class="space-y-3 p-5">
-              <p class="text-xs font-medium uppercase tracking-wide text-amber-600">
+              <p class="text-xs font-medium uppercase tracking-wide text-amber-600" data-i18n="class.family">
                 Aile Sınıf
               </p>
               <h3 class="text-lg font-semibold text-gray-900">Dacia Duster</h3>
@@ -282,11 +297,9 @@
                     fill="currentColor"
                     aria-hidden="true"
                   >
-                    <path
-                      d="M19.14 12.94a7.5 7.5 0 0 0 .05-.94 7.5 7.5 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.46 7.46 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54c-.57.22-1.12.52-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.7 7.84a.5.5 0 0 0 .12.64L4.85 10.06a7.5 7.5 0 0 0-.05.94c0 .32.02.63.05.94L2.82 14.5a.5.5 0 0 0-.12.64l1.92 3.32c.13.23.4.32.64.22l2.39-.96c.5.41 1.06.73 1.63.94l.36 2.54c.05.24.26.42.5.42h3.84c.24 0 .45-.18.5-.42l.36-2.54c.57-.22 1.12-.52 1.63-.94l2.39.96c.24.1.51.01.64-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58ZM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7Z"
-                    />
+                    <path d="M19.14 12.94a7.5 7.5 0 0 0 .05-.94 7.5 7.5 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.46 7.46 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.4[...]"/>
                   </svg>
-                  Manuel Vites
+                  <span data-i18n="spec.transmission.manual">Manuel Vites</span>
                 </li>
                 <li class="inline-flex items-center gap-1">
                   <svg
@@ -295,11 +308,9 @@
                     fill="currentColor"
                     aria-hidden="true"
                   >
-                    <path
-                      d="M7 2a2 2 0 0 0-2 2v14a4 4 0 1 0 8 0V4a2 2 0 0 0-2-2H7Zm10 5v10a3 3 0 0 0 6 0V8.83a3 3 0 0 0-.88-2.12l-3.83-3.83-.71.71L21.41 7H19a2 2 0 0 0-2 2Z"
-                    />
+                    <path d="M7 2a2 2 0 0 0-2 2v14a4 4 0 1 0 8 0V4a2 2 0 0 0-2-2H7Zm10 5v10a3 3 0 0 0 6 0V8.83a3 3 0 0 0-.88-2.12l-3.83-3.83-.71.71L21.41 7H19a2 2 0 0 0-2 2Z"/>
                   </svg>
-                  Dizel
+                  <span data-i18n="spec.fuel.diesel">Dizel</span>
                 </li>
                 <li class="inline-flex items-center gap-1">
                   <svg
@@ -308,21 +319,20 @@
                     fill="currentColor"
                     aria-hidden="true"
                   >
-                    <path
-                      d="M16 11a4 4 0 1 0-8 0 4 4 0 0 0 8 0Zm-9 6a5 5 0 0 0-5 5h2a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5H7Z"
-                    />
+                    <path d="M16 11a4 4 0 1 0-8 0 4 4 0 0 0 8 0Zm-9 6a5 5 0 0 0-5 5h2a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5H7Z"/>
                   </svg>
-                  5 Kişilik
+                  <span data-i18n="spec.seats5">5 Kişilik</span>
                 </li>
               </ul>
 
               <div class="mt-2 flex items-end justify-between">
                 <p class="text-xl font-bold text-gray-900">
-                  35 Euro <span class="text-sm font-medium text-gray-500">/ Gün</span>
+                  35 Euro <span class="text-sm font-medium text-gray-500" data-i18n="price.perDay">/ Gün</span>
                 </p>
                 <a
                   href="#iletisim"
-                  class="rounded-md bg-amber-500 px-4 py-2 text-sm font-semibold text-gray-900 transition-colors hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2"
+                  class="rounded-md bg-amber-500 px-4 py-2 text-sm font-semibold text-gray-900 transition-colors hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 focus:ring-offset-white"
+                  data-i18n="cta.rentNow"
                   >Hemen Kirala</a
                 >
               </div>
@@ -339,7 +349,7 @@
           <!-- Column 1: About -->
           <div id="hakkimizda">
             <h3 class="text-white text-lg font-semibold">AAA TRANS</h3>
-            <p class="mt-3 text-sm leading-relaxed text-gray-400">
+            <p class="mt-3 text-sm leading-relaxed text-gray-400" data-i18n="footer.about.text">
               Misyonumuz; güvenli, hızlı ve ekonomik araç kiralama deneyimini modern
               bir hizmet anlayışıyla sunmak. Geniş filomuz, şeffaf fiyatlarımız ve
               güler yüzlü ekibimizle yanınızdayız.
@@ -348,25 +358,25 @@
 
           <!-- Column 2: Quick Links -->
           <div>
-            <h3 class="text-white text-lg font-semibold">Hızlı Bağlantılar</h3>
+            <h3 class="text-white text-lg font-semibold" data-i18n="footer.links.title">Hızlı Bağlantılar</h3>
             <ul class="mt-3 space-y-2 text-sm">
               <li>
-                <a href="#araclar" class="hover:text-white transition-colors"
+                <a href="#araclar" class="hover:text-white transition-colors" data-i18n="footer.links.vehicles"
                   >Araçlarımız</a
                 >
               </li>
               <li>
-                <a href="#firsatlar" class="hover:text-white transition-colors"
+                <a href="#firsatlar" class="hover:text-white transition-colors" data-i18n="footer.links.deals"
                   >Fırsatlar</a
                 >
               </li>
               <li>
-                <a href="#hakkimizda" class="hover:text-white transition-colors"
+                <a href="#hakkimizda" class="hover:text-white transition-colors" data-i18n="footer.links.about"
                   >Hakkımızda</a
                 >
               </li>
               <li>
-                <a href="#iletisim" class="hover:text-white transition-colors"
+                <a href="#iletisim" class="hover:text-white transition-colors" data-i18n="footer.links.contact"
                   >İletişim</a
                 >
               </li>
@@ -375,13 +385,20 @@
 
           <!-- Column 3: Contact -->
           <div id="iletisim">
-            <h3 class="text-white text-lg font-semibold">İletişim</h3>
+            <h3 class="text-white text-lg font-semibold" data-i18n="footer.contact.title">İletişim</h3>
             <ul class="mt-3 space-y-2 text-sm not-italic">
               <li class="text-gray-400">
-                Adres: Atatürk Cd. No: 123, Kadıköy / İstanbul
+                <span class="font-medium" data-i18n="footer.contact.addressLabel">Adres:</span>
+                <span> Atatürk Cd. No: 123, Kadıköy / İstanbul</span>
               </li>
-              <li class="text-gray-400">Telefon: +90 (216) 555 00 00</li>
-              <li class="text-gray-400">E-posta: info@aaatrans.com</li>
+              <li class="text-gray-400">
+                <span class="font-medium" data-i18n="footer.contact.phoneLabel">Telefon:</span>
+                <span> +90 (216) 555 00 00</span>
+              </li>
+              <li class="text-gray-400">
+                <span class="font-medium" data-i18n="footer.contact.emailLabel">E-posta:</span>
+                <span> info@aaatrans.com</span>
+              </li>
             </ul>
           </div>
         </div>
@@ -391,10 +408,349 @@
         <div
           class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 text-xs text-gray-400"
         >
-          <p>© <span id="yil">2025</span> AAA TRANS. Tüm hakları saklıdır.</p>
-          <p>KVKK & Gizlilik • Koşullar</p>
+          <p data-i18n-html="footer.bottom.copyright">© <span id="yil">2025</span> AAA TRANS. Tüm hakları saklıdır.</p>
+          <p data-i18n="footer.bottom.legal">KVKK & Gizlilik • Koşullar</p>
         </div>
       </div>
     </footer>
+
+    <script>
+      // Translation dictionaries
+      const translations = {
+        tr: {
+          meta: {
+            title: "AAA TRANS | Araç Kiralama",
+            description: "AAA TRANS - Geniş ve sigortalı filomuzla konforlu araç kiralama deneyimi."
+          },
+          ui: { language: "Dil" },
+          aria: { primaryNav: "Birincil" },
+          brand: { home_aria: "AAA TRANS anasayfa" },
+          hero: {
+            ariaLabel: "Kahraman alanı",
+            heading: "Hayalinizdeki Araca Bir Adım Uzaktasınız",
+            subheading: "Geniş ve sigortalı filomuzla konforlu yolculuklar sizi bekliyor.",
+            cta: "Filoyu İncele"
+          },
+          nav: {
+            vehicles: "Araçlarımız",
+            deals: "Fırsatlar",
+            about: "Hakkımızda",
+            contact: "İletişim"
+          },
+          featured: {
+            title: "Öne Çıkan Araçlarımız",
+            subtitle: "İhtiyacınıza uygun ekonomik, konforlu ve aile araçlarımızdan seçin."
+          },
+          class: {
+            economy: "Ekonomik Sınıf",
+            comfort: "Konfor Sınıf",
+            family: "Aile Sınıf"
+          },
+          spec: {
+            transmission: { automatic: "Otomatik Vites", manual: "Manuel Vites" },
+            fuel: { petrol: "Benzinli", diesel: "Dizel", hybrid: "Hibrit" },
+            seats4: "4 Kişilik",
+            seats5: "5 Kişilik"
+          },
+          price: { perDay: "/ Gün" },
+          cta: { rentNow: "Hemen Kirala" },
+          footer: {
+            about: {
+              text:
+                "Misyonumuz; güvenli, hızlı ve ekonomik araç kiralama deneyimini modern bir hizmet anlayışıyla sunmak. Geniş filomuz, şeffaf fiyatlarımız ve güler yüzlü ekibimizle yanınızdayız."
+            },
+            links: {
+              title: "Hızlı Bağlantılar",
+              vehicles: "Araçlarımız",
+              deals: "Fırsatlar",
+              about: "Hakkımızda",
+              contact: "İletişim"
+            },
+            contact: {
+              title: "İletişim",
+              addressLabel: "Adres:",
+              phoneLabel: "Telefon:",
+              emailLabel: "E-posta:"
+            },
+            bottom: {
+              copyright: "© {year} AAA TRANS. Tüm hakları saklıdır.",
+              legal: "KVKK & Gizlilik • Koşullar"
+            }
+          },
+          alt: {
+            economy: "Ekonomik sınıf araç örnek görseli",
+            comfort: "Konfor sınıf araç örnek görseli",
+            family: "Aile sınıf araç örnek görseli"
+          }
+        },
+        en: {
+          meta: {
+            title: "AAA TRANS | Car Rental",
+            description: "AAA TRANS - Comfortable car rental experience with our wide, insured fleet."
+          },
+          ui: { language: "Language" },
+          aria: { primaryNav: "Primary" },
+          brand: { home_aria: "AAA TRANS homepage" },
+          hero: {
+            ariaLabel: "Hero area",
+            heading: "You're one step away from your dream car",
+            subheading: "Comfortable journeys await you with our wide and insured fleet.",
+            cta: "Browse Fleet"
+          },
+          nav: {
+            vehicles: "Our Fleet",
+            deals: "Deals",
+            about: "About",
+            contact: "Contact"
+          },
+          featured: {
+            title: "Featured Vehicles",
+            subtitle: "Choose from economical, comfortable and family cars."
+          },
+          class: {
+            economy: "Economy Class",
+            comfort: "Comfort Class",
+            family: "Family Class"
+          },
+          spec: {
+            transmission: { automatic: "Automatic Transmission", manual: "Manual Transmission" },
+            fuel: { petrol: "Petrol", diesel: "Diesel", hybrid: "Hybrid" },
+            seats4: "4 Seater",
+            seats5: "5 Seater"
+          },
+          price: { perDay: "/ Day" },
+          cta: { rentNow: "Rent Now" },
+          footer: {
+            about: {
+              text:
+                "Our mission is to offer a safe, fast and economical car rental experience with a modern service approach. We stand by you with our wide fleet, transparent prices and friendly team."
+            },
+            links: {
+              title: "Quick Links",
+              vehicles: "Our Fleet",
+              deals: "Deals",
+              about: "About",
+              contact: "Contact"
+            },
+            contact: {
+              title: "Contact",
+              addressLabel: "Address:",
+              phoneLabel: "Phone:",
+              emailLabel: "Email:"
+            },
+            bottom: {
+              copyright: "© {year} AAA TRANS. All rights reserved.",
+              legal: "Privacy & Terms"
+            }
+          },
+          alt: {
+            economy: "Sample image of an economy class vehicle",
+            comfort: "Sample image of a comfort class vehicle",
+            family: "Sample image of a family class vehicle"
+          }
+        },
+        de: {
+          meta: {
+            title: "AAA TRANS | Autovermietung",
+            description: "AAA TRANS - Komfortables Mietwagenerlebnis mit unserer großen, versicherten Flotte."
+          },
+          ui: { language: "Sprache" },
+          aria: { primaryNav: "Primär" },
+          brand: { home_aria: "AAA TRANS Startseite" },
+          hero: {
+            ariaLabel: "Hero-Bereich",
+            heading: "Nur einen Schritt von Ihrem Traumauto entfernt",
+            subheading: "Komfortable Fahrten erwarten Sie mit unserer großen, versicherten Flotte.",
+            cta: "Flotte ansehen"
+          },
+          nav: {
+            vehicles: "Flotte",
+            deals: "Angebote",
+            about: "Über uns",
+            contact: "Kontakt"
+          },
+          featured: {
+            title: "Ausgewählte Fahrzeuge",
+            subtitle: "Wählen Sie aus wirtschaftlichen, komfortablen und Familienautos."
+          },
+          class: {
+            economy: "Economy-Klasse",
+            comfort: "Komfortklasse",
+            family: "Familienklasse"
+          },
+          spec: {
+            transmission: { automatic: "Automatikgetriebe", manual: "Schaltgetriebe" },
+            fuel: { petrol: "Benzin", diesel: "Diesel", hybrid: "Hybrid" },
+            seats4: "4-sitzig",
+            seats5: "5-sitzig"
+          },
+          price: { perDay: "/ Tag" },
+          cta: { rentNow: "Jetzt mieten" },
+          footer: {
+            about: {
+              text:
+                "Unsere Mission ist es, ein sicheres, schnelles und wirtschaftliches Autovermietungserlebnis mit einem modernen Serviceansatz zu bieten. Wir stehen Ihnen mit unserer großen Flotte, transparenten Preisen und einem freundlichen Team zur Seite."
+            },
+            links: {
+              title: "Schnellzugriffe",
+              vehicles: "Flotte",
+              deals: "Angebote",
+              about: "Über uns",
+              contact: "Kontakt"
+            },
+            contact: {
+              title: "Kontakt",
+              addressLabel: "Adresse:",
+              phoneLabel: "Telefon:",
+              emailLabel: "E-Mail:"
+            },
+            bottom: {
+              copyright: "© {year} AAA TRANS. Alle Rechte vorbehalten.",
+              legal: "Datenschutz & Bedingungen"
+            }
+          },
+          alt: {
+            economy: "Beispielfoto eines Economy-Klasse-Fahrzeugs",
+            comfort: "Beispielfoto eines Komfortklasse-Fahrzeugs",
+            family: "Beispielfoto eines Familienklasse-Fahrzeugs"
+          }
+        },
+        pl: {
+          meta: {
+            title: "AAA TRANS | Wynajem samochodów",
+            description: "AAA TRANS – Komfortowy wynajem samochodów z naszą szeroką i ubezpieczoną flotą."
+          },
+          ui: { language: "Język" },
+          aria: { primaryNav: "Główne" },
+          brand: { home_aria: "Strona główna AAA TRANS" },
+          hero: {
+            ariaLabel: "Sekcja główna",
+            heading: "Jesteś o krok od wymarzonego auta",
+            subheading: "Szeroka i ubezpieczona flota – komfortowa podróż czeka.",
+            cta: "Zobacz flotę"
+          },
+          nav: {
+            vehicles: "Nasza flota",
+            deals: "Oferty",
+            about: "O nas",
+            contact: "Kontakt"
+          },
+          featured: {
+            title: "Polecane pojazdy",
+            subtitle: "Wybierz spośród ekonomicznych, komfortowych i rodzinnych aut."
+          },
+          class: {
+            economy: "Klasa ekonomiczna",
+            comfort: "Klasa komfort",
+            family: "Klasa rodzinna"
+          },
+          spec: {
+            transmission: { automatic: "Automat", manual: "Manual" },
+            fuel: { petrol: "Benzyna", diesel: "Diesel", hybrid: "Hybryda" },
+            seats4: "4-osobowy",
+            seats5: "5-osobowy"
+          },
+          price: { perDay: "/ dzień" },
+          cta: { rentNow: "Rezerwuj teraz" },
+          footer: {
+            about: {
+              text:
+                "Naszą misją jest oferowanie bezpiecznego, szybkiego i ekonomicznego wynajmu samochodów w nowoczesnym wydaniu. Wspieramy Cię szeroką flotą, przejrzystymi cenami i życzliwym zespołem."
+            },
+            links: {
+              title: "Szybkie linki",
+              vehicles: "Nasza flota",
+              deals: "Oferty",
+              about: "O nas",
+              contact: "Kontakt"
+            },
+            contact: {
+              title: "Kontakt",
+              addressLabel: "Adres:",
+              phoneLabel: "Telefon:",
+              emailLabel: "E-mail:"
+            },
+            bottom: {
+              copyright: "© {year} AAA TRANS. Wszelkie prawa zastrzeżone.",
+              legal: "Prywatność i Warunki"
+            }
+          },
+          alt: {
+            economy: "Przykładowe zdjęcie samochodu klasy ekonomicznej",
+            comfort: "Przykładowe zdjęcie samochodu klasy komfort",
+            family: "Przykładowe zdjęcie samochodu klasy rodzinnej"
+          }
+        }
+      };
+
+      // Helper to get nested key: "a.b.c"
+      function tGet(obj, path) {
+        return path.split(".").reduce((o, k) => (o && o[k] != null ? o[k] : undefined), obj);
+      }
+
+      function applyTranslations(lang) {
+        const dict = translations[lang] || translations.tr;
+
+        // Set <html lang="">
+        document.documentElement.setAttribute("lang", lang);
+
+        // Title + meta description
+        if (dict.meta?.title) document.title = dict.meta.title;
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc && dict.meta?.description) metaDesc.setAttribute("content", dict.meta.description);
+
+        // Text nodes
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          const val = tGet(dict, key);
+          if (typeof val === "string") el.textContent = val;
+        });
+
+        // Attributes via data-i18n-*
+        document.querySelectorAll("*").forEach((el) => {
+          Array.from(el.attributes).forEach((attr) => {
+            if (attr.name.startsWith("data-i18n-") && attr.name !== "data-i18n") {
+              const realAttr = attr.name.replace("data-i18n-", "");
+              const key = attr.value;
+              let val = tGet(dict, key);
+              if (typeof val === "string") {
+                if (realAttr === "html") {
+                  // Allow placeholder replacement
+                  val = val.replace("{year}", String(new Date().getFullYear()));
+                  el.innerHTML = val;
+                } else {
+                  el.setAttribute(realAttr, val);
+                }
+              }
+            }
+          });
+        });
+      }
+
+      (function initI18n() {
+        const select = document.getElementById("lang-switcher");
+        const saved = localStorage.getItem("lang");
+        // Optional domain-based default: .pl -> pl
+        const hostLang = location.hostname.endsWith(".pl") ? "pl" : null;
+        const browser = (navigator.language || "tr").slice(0, 2);
+        const initial = saved || hostLang || (["tr", "en", "de", "pl"].includes(browser) ? browser : "tr");
+
+        applyTranslations(initial);
+        if (select) select.value = initial;
+
+        // Persist selection
+        if (select) {
+          select.addEventListener("change", (e) => {
+            const lang = e.target.value;
+            localStorage.setItem("lang", lang);
+            applyTranslations(lang);
+          });
+        }
+
+        // Ensure footer year is current if any static span remains
+        const yilEl = document.getElementById("yil");
+        if (yilEl) yilEl.textContent = new Date().getFullYear();
+      })();
+    </script>
   </body>
 </html>
